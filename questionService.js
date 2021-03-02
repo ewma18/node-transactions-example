@@ -5,9 +5,7 @@ const Promise = require('bluebird'),
 	onboardingQueueClient = require('../infra/rabbitMQ/onboardingQueueClient'),
 	queueService = require('./queueService.js');
 
-
-const pdMysql = require('pd-node-mysql-client');
-const Transaction = pdMysql.Transaction;
+const Transaction = require('./transaction');;
 const dbConfig = require('../config.js').getConnections().mysql;;
 
 const DOCUMENT_TYPE = require('../constant/documentType'),
@@ -65,6 +63,7 @@ const questionService = {
 				await tagServices.createTags(QuestionMaterial.Tags, QuestionMaterial, transaction)
 			}
 
+            console.log("Commiting changes"); 
 			await transaction.commitAsync();
 
 			console.log("Queue Material-Question [" + QuestionMaterial.Title + "]");

@@ -1,5 +1,6 @@
 const config = require('../../config.js');
-const dbClient = require('pd-node-mysql-client').getClient(config.getConnections().mysql);
+const getDBClient = require('./dbClient');
+const dbClient = getDBClient(config.getConnections().mysql);
 
 
 const questionRepository = {
